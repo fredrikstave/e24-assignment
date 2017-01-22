@@ -1,0 +1,33 @@
+{
+  "name": "e24-assignment-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Fredrik Stave",
+  "description": "<ADD-DESCRIPTION>",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/fredrikstave/e24-assignment.git"
+  },
+  "contributors": [
+    {
+      "name": "Fredrik Stave",
+      "email": "ferdrikstave@me.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://gitlab.com/fredrikstave/e24-assignment/issues"
+  },
+  "scripts": {
+    "test": "echo \"Not imlemented yet!\""
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-sass": "^3.1.0"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "license": "MIT"
+}

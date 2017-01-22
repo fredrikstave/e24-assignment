@@ -1,0 +1,7 @@
+{
+    "name": "e24-assignment-article",
+    "version": "1.0.0",
+    "description": "This is an article component",
+    "private": true,
+    "main": "./Article.js"
+}

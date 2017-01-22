@@ -1,0 +1,107 @@
+.article:not(:first-child), .article-placeholder:not(:first-child) {
+    margin-top: 10px;
+}
+
+.article a {
+    display: block;
+    color: #333333;
+    padding: 10px;
+    transition: background-color 200ms ease-in-out;
+    text-decoration: none;
+}
+
+.article a:hover {
+    color: #333333;
+    background-color: #f5f5f5;
+}
+
+.article__excerpt {
+    margin-top: 10px;
+}
+
+.article-placeholder {
+    padding: 10px;
+}
+
+.article-placeholder__wrapper {
+    display: inline-block;
+}
+
+.element {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.element:before {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    background-image: linear-gradient(to right, #f6f7f9 0%, #e9ebee 20%, #f6f7f9 40%, #f6f7f9 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+    content: ' ';
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    position: absolute;
+}
+
+.article-placeholder__image {
+    display: inline-block;
+    background-color: #f6f7f9;
+    width: 128px;
+    height: 80px;
+    vertical-align: top;
+}
+
+.article-placeholder__image.element:before {
+    -webkit-animation-duration: 5s;
+}
+
+.article-placeholder__content {
+    position: relative;
+    background-color: #fff;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.article-placeholder__title {
+    display: block;
+    background-color: #f6f7f9;
+    height: 14px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.article-placeholder__published {
+    display: block;
+    background-color: #f6f7f9;
+    height: 10px;
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.article-placeholder__text {
+    display: block;
+    background-color: #f6f7f9;
+    height: 10px;
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+.article-placeholder__text.no-image {
+    width: 600px;
+}
+
+@-webkit-keyframes placeHolderShimmer {
+    0% {
+        transform: translateX(-468px)
+    }
+    100% {
+        transform: translateX(468px)
+    }
+}
