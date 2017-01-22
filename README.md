@@ -1,19 +1,14 @@
-# E24 programming assignment
-This is my programming assignment to get qualified as a candidate for the developer opening currently available.
+# Standard Code Test
+To run the project, do the following:
 
-To run the project you can do either of the following:
-
-1. Run `npm install` and `composer install` within the same directory as this README file
-2. Excecute `docker run`
-3. Open your browser and navigate to http://localhost:3000
-
-If you don't have Docker installed or if you for some reason would prefer running the project locally
-on your own machine, you can do the following.
-
-1. Run `npm install` and `composer install` within the same directory as this README file
-2. `cd` into `backend`
-3. Run `php bin/console serve`
-4. Open your browser and navigate to http://localhost:3000
+1. Open two terminal windows.
+2. In one window, navigate to the `backend` folder.
+3. Run `php bin/console server:run`.
+4. In your other window, navigate to the `frontend` folder.
+5. Run `npm install`.
+6. When the install is complete, run `npm start`.
+7. The backend should run on `localhost:8000` and the frontend should run at `localhost:3000`.
+8. Open your web browser and go to `localhost:3000` to test out the application.
 
 If you have any problems running the program, just drop me an e-mail, and I'll assist you.
 
