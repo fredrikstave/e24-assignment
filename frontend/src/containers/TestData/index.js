@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Article from '../../components/Article';
+import Section from '../../components/Section';
 import ArticlePlaceholder from '../../components/ArticlePlaceholder';
 import { addTestDataItemsAction } from '../../redux/actions';
 
@@ -25,6 +26,7 @@ class TestData extends Component {
                         description={article.description}
                         link={article.link}
                         pubDate={article.publishDate}
+                        category={article.category}
                     />
                 );
             });
@@ -37,11 +39,10 @@ class TestData extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
-            <div className="section">
+            <Section>
                 {this.renderContent()}
-            </div>
+            </Section>
         );
     }
 }

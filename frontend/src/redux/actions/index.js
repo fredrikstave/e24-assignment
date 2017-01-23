@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { BASE_URL } from '../../env';
+import { BACKEND_URL } from '../../env';
 import { 
     ADD_FEED_ARTICLES, 
     ADD_TEST_DATA_ITEMS, 
@@ -8,7 +8,7 @@ import {
 
 export function addFeedArticlesAction() {
     return function(dispatch) {
-        fetch(`${BASE_URL}/feed`)
+        fetch(`${BACKEND_URL}/feed`)
             .then(response => response.json())
             .then((json) => {
                 dispatch({
@@ -24,7 +24,7 @@ export function addFeedArticlesAction() {
 
 export function addVarnishLogEntriesAction() {
     return function(dispatch) {
-        fetch(`${BASE_URL}/varnish-log`)
+        fetch(`${BACKEND_URL}/varnish-log`)
             .then(response => response.json())
             .then((json) => {
                 dispatch({
@@ -40,7 +40,7 @@ export function addVarnishLogEntriesAction() {
 
 export function addTestDataItemsAction() {
     return function(dispatch) {
-        fetch(`${BASE_URL}/test-data`)
+        fetch(`${BACKEND_URL}/test-data`)
             .then(response => response.json())
             .then((json) => {
                 dispatch({

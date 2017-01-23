@@ -1,7 +1,7 @@
 {
     "name": "e24-assignment-article-placeholder",
     "version": "1.0.0",
-    "description": "This is an article placeholder component",
+    "description": "This is an article placeholder component to be used while data is downloading",
     "private": true,
     "main": "./ArticlePlaceholder.js"
 }

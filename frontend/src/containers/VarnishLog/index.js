@@ -3,6 +3,7 @@ import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { addVarnishLogEntriesAction } from '../../redux/actions';
 import DataList, { DataListPlaceholder } from '../../components/DataList';
+import Section from '../../components/Section';
 import './style.css';
 
 function mapStateToProps(state) {
@@ -20,18 +21,18 @@ class VarnishLog extends Component {
         if (this.props.data) {
             return this.props.data.map((list, index) => {
                 return (
-                    <Col key={index} xs={12} sm={6} className="section__column">
-                        <h3>{list.title}</h3>
-                        <DataList items={list.items} textFormat="Lastet ned {0} ganger i dag" />
+                    <Col key={index} xs={12} sm={6}>
+                        <h3 className="column-title">{list.title}</h3>
+                        <DataList items={list.items} />
                     </Col>
                 );
             });
         } else {
-            // Render 10 article placeholders
+            // Render 2 placeholder lists
             return [...Array(2).keys()].map((index) => {
                 return (
-                    <Col key={index} xs={12} sm={6} className="section__column">
-                        <h3>Tittel</h3>
+                    <Col key={index} xs={12} sm={6}>
+                        <h3 className="column-title">Title</h3>
                         <DataListPlaceholder />
                     </Col>
                 );
@@ -41,9 +42,9 @@ class VarnishLog extends Component {
 
     render() {
         return (
-            <div className="section">
+            <Section>
                 {this.renderDataList()}
-            </div>
+            </Section>
         );
     }
 }

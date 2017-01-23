@@ -1,0 +1,87 @@
+.header {
+    display: block;
+    background-color: #F1F1F2;
+    box-shadow: 1px 1px 2px rgba(40, 40, 40, .25);
+}
+
+.header__menu {
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.header__menu__link {
+    padding: 10px 20px;
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 18px;
+    color: #444e57;
+    cursor: pointer;
+    outline: none;
+    border: 1px dotted transparent;
+    transition: color .2s ease-in-out;
+    border-bottom: 2px solid transparent;
+}
+
+.header__menu__link.active {
+    color: #444e57;
+    border-bottom-color: #F16520;
+}
+
+.header__menu__link:hover {
+    color: #F16520;
+}
+
+.header__menu__link:hover,
+.header__menu__link:active,
+.header__menu__link:focus {
+    text-decoration: none;
+}
+
+.header__toggle {
+    display: none;
+    background-color: transparent;
+    font-family: 'Gill Sans', sans-serif;
+    border: none;
+    font-size: 20px;
+    padding: 10px 15px;
+    outline: none;
+    transition: all 200ms ease-in-out;
+}
+
+.header__toggle:hover {
+    background-color: #ddd;
+}
+
+.header__toggle .material-icons {
+    color: #F16520;
+    vertical-align: text-bottom;
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        text-align: right;
+    }
+
+    .header__menu {
+        display: none;
+        text-align: left;
+    }
+
+    .header__menu.toggled {
+        display: block;
+    }
+
+    .header__menu__link {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .header__menu__link.active {
+        color: #444e57;
+        background-color: #ddd;
+    }
+
+    .header__toggle {
+        display: block;
+    }
+}

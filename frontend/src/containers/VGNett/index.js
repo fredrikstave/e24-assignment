@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addFeedArticlesAction } from '../../redux/actions';
 import Article from '../../components/Article';
+import Section from '../../components/Section';
 import ArticlePlaceholder from '../../components/ArticlePlaceholder';
 import './style.css';
 
@@ -57,10 +58,9 @@ class VGNett extends Component {
 
     render() {
         return (
-            <div className="section">
-                {this.renderHeader()}
+            <Section title={this.props.data && this.props.data.title} image={this.props.data && this.props.data.image}>
                 {this.renderArticles()}
-            </div>
+            </Section>
         )
     }
 }

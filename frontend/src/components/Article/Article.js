@@ -48,6 +48,7 @@ export default class Article extends Component {
                             <Media.Heading>{this.props.title}</Media.Heading>
                             <em>Publisert {publishDate}</em>
                             {this.renderDescription()}
+                            {this.props.category && <p><strong>Kategori: </strong> {this.props.category}</p>}
                         </Media.Body>
                     </Media>
                 </a>

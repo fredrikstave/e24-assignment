@@ -54,6 +54,10 @@
     width: 600px;
 }
 
+/*
+ * Styling to make a cool article loading effect
+ * based on Facebooks article plaecholder.
+*/
 .element {
     position: relative;
     overflow: hidden;
@@ -83,5 +87,15 @@
     }
     100% {
         transform: translateX(468px)
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .article-placeholder__text {
+        width: 100%;
+    }
+
+    .article-placeholder__text.no-image {
+        width: 100%;
     }
 }

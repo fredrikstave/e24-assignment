@@ -1,0 +1,7 @@
+{
+    "name": "e24-assignment-header",
+    "version": "1.0.0",
+    "description": "A global header component containing a navigation menu",
+    "private": true,
+    "main": "./Header.js"
+}

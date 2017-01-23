@@ -36,12 +36,6 @@
     <parameter key="mailer_user">null</parameter>
     <parameter key="mailer_password">null</parameter>
     <parameter key="secret">566789adf214685e57a0d407be0e59b31ef2b607</parameter>
-    <parameter key="varnish_log_file_pattern">/^(\S+) (\S+) (\S+) \[([^:]+):(\d+:\d+:\d+) ([^\]]+)\] \"(\S+) (?P&lt;resource&gt;.*?) (\S+)\" (\S+) (\S+) "(?P&lt;host&gt;[^"]*)" "([^"]*)"$/</parameter>
-    <parameter key="api" type="collection">
-      <parameter key="varnish_log">http://tech.vg.no/intervjuoppgave/varnish.log</parameter>
-      <parameter key="vg_nett_feed">http://www.vg.no/rss/feed/forsiden/?frontId=1</parameter>
-      <parameter key="test_data">http://static.e24.no/testfeed.json</parameter>
-    </parameter>
     <parameter key="locale">en</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
@@ -504,7 +498,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>e7FVl9zJXA</argument>
                 <argument>0</argument>
-                <argument>KjA9-TjgH1urbisBC8n9px</argument>
+                <argument>an-xLoy6LfkmTgbniaTBCm</argument>
                 <argument>/Users/Fredrik/Documents/Jobb/E24/assignment/backend/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -632,7 +626,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>utQGAf8+yh</argument>
           <argument>null</argument>
-          <argument>KjA9-TjgH1urbisBC8n9px</argument>
+          <argument>an-xLoy6LfkmTgbniaTBCm</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -653,7 +647,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>RjjfoX4rcj</argument>
       <argument>0</argument>
-      <argument>KjA9-TjgH1urbisBC8n9px</argument>
+      <argument>an-xLoy6LfkmTgbniaTBCm</argument>
       <argument>/Users/Fredrik/Documents/Jobb/E24/assignment/backend/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -663,7 +657,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>raU+Xg8OmV</argument>
       <argument>0</argument>
-      <argument>KjA9-TjgH1urbisBC8n9px</argument>
+      <argument>an-xLoy6LfkmTgbniaTBCm</argument>
       <argument>/Users/Fredrik/Documents/Jobb/E24/assignment/backend/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1748,7 +1742,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5885200e9145c0.67819738</argument>
+            <argument>58867459000bd3.78477671</argument>
           </service>
         </argument>
       </argument>
@@ -1896,7 +1890,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>5885200e9145c0.67819738</argument>
+            <argument>58867459000bd3.78477671</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

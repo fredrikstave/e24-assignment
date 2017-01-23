@@ -1,7 +1,7 @@
 {
     "name": "e24-assignment-data-list",
     "version": "1.0.0",
-    "description": "This is a data list component",
+    "description": "A list component to display aggregated access log data",
     "private": true,
     "main": "./DataList.js"
 }

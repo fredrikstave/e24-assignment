@@ -11,6 +11,6 @@ To run the project, do the following:
 8. The backend should run on `localhost:8000` and the frontend should run at `localhost:3000`.
 9. Open your web browser and go to `localhost:3000` to test out the application.
 
-If you have any problems running the program, just drop me an e-mail, and I'll assist you.
+If you encounter any problems running the program, just drop me an e-mail and I'll assist you.
 
 Enjoy!

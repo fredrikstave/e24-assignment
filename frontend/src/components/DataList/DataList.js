@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
+/**
+ * Placeholder list that can be rendered while waiting for state to be set
+ */
 export const DataListPlaceholder = () => (
     <ListGroup>
-        <ListGroupItem header="Laster inn...">Lastet ned 0 ganger</ListGroupItem>
-        <ListGroupItem header="Laster inn...">Lastet ned 0 ganger</ListGroupItem>
-        <ListGroupItem header="Laster inn...">Lastet ned 0 ganger</ListGroupItem>
-        <ListGroupItem header="Laster inn...">Lastet ned 0 ganger</ListGroupItem>
-        <ListGroupItem header="Laster inn...">Lastet ned 0 ganger</ListGroupItem>
+        <ListGroupItem header="Loading...">Count: 0</ListGroupItem>
+        <ListGroupItem header="Loading...">Count: 0</ListGroupItem>
+        <ListGroupItem header="Loading...">Count: 0</ListGroupItem>
+        <ListGroupItem header="Loading...">Count: 0</ListGroupItem>
+        <ListGroupItem header="Loading...">Count: 0</ListGroupItem>
     </ListGroup>
 );
 
 export default class DataList extends Component {
     static propTypes = {
-        items: React.PropTypes.array.isRequired,
+        items: React.PropTypes.arrayOf(React.PropTypes.shape({
+            title: React.PropTypes.string.isRequired,
+            count: React.PropTypes.number.isRequired,
+            url: React.PropTypes.string.isRequired
+        })).isRequired,
         textFormat: React.PropTypes.string
     }
 
@@ -25,7 +32,7 @@ export default class DataList extends Component {
                     let description = item.count;
 
                     return <ListGroupItem key={index} href={item.url} target="_blank" header={header}>
-                        {description}
+                        Count: {description}
                     </ListGroupItem>;
                 })}
             </ListGroup>

@@ -1,6 +1,0 @@
-parameters:
-  varnish_log_file_pattern: /^(\S+) (\S+) (\S+) \[([^:]+):(\d+:\d+:\d+) ([^\]]+)\] \"(\S+) (?P<resource>.*?) (\S+)\" (\S+) (\S+) "(?P<host>[^"]*)" "([^"]*)"$/
-  api:
-    varnish_log: http://tech.vg.no/intervjuoppgave/varnish.log
-    vg_nett_feed: http://www.vg.no/rss/feed/forsiden/?frontId=1
-    test_data: http://static.e24.no/testfeed.json

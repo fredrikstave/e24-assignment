@@ -1,7 +1,7 @@
 {
     "name": "e24-assignment-article",
     "version": "1.0.0",
-    "description": "This is an article component",
+    "description": "This is an article component to display an article with title, text and optionally an image",
     "private": true,
     "main": "./Article.js"
 }

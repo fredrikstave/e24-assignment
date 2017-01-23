@@ -1,0 +1,7 @@
+{
+    "name": "e24-assignment-section",
+    "version": "1.0.0",
+    "description": "A general section component",
+    "private": true,
+    "main": "./Section.js"
+}

@@ -5,85 +5,67 @@ namespace AssignmentBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use AssignmentBundle\Model\Article;
+use SimplePie;
 
 class FeedController extends FOSRestController
 {
     /**
+     * This is the controller for main route for the feed endpoint.
+     * 
      * @Rest\Get("/feed")
      */
     public function indexAction()
     {
-        $feed = null;
+        $feed = new SimplePie();
+        $feed->set_feed_url('http://www.vg.no/rss/feed/forsiden/?frontId=1');
+        $feed->enable_cache(false);
 
-        try {
-            // Load the resource endpoint from configuration
-            $resource = $this->container->getParameter('api');
-            $feed = simplexml_load_file($resource['vg_nett_feed']);
-        } catch(\Exception $exception) {
-            // If we encounter a problem (likely due to the resource not existing)
-            // we return an empty response
-            $response = new JsonResponse([
-                'message' => 'The resource could not be loaded'
-            ]);
-            $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
+        // Initialize the feed
+        if ($feed->init()) {
+            // Friendlier array representation that we can pass in our JsonResponse object
+            $feedArticles = [
+                'title' => $feed->get_title(),
+                'description' => $feed->get_description(),
+                'image' => [
+                    'title' => $feed->get_image_title(),
+                    'link' => $feed->get_image_link(),
+                    'url' => $feed->get_image_url()
+                ],
+                'articles' => []
+            ];
 
-            return $response;
+            // Loop through all the feed items building up the articles array
+            foreach ($feed->get_items() as $item) {
+                $timestamp = strtotime($item->get_date('d-m-Y H:i'));
+                $image = $item->get_item_tags('', 'image');
+
+                // Check that the image isn't empty and extract the
+                // url (which is stored under the data key)
+                if (!empty($image)) {
+                    $image = $image[0]['data'];
+                } else {
+                    $image = null;
+                }
+
+                $feedArticles['articles'][] = [
+                    'title' => $item->get_title(),
+                    'description' => $item->get_description(),
+                    'link' => $item->get_link(),
+                    'image' => $image,
+                    'publishDate' => date('c', $timestamp)
+                ];
+            }
+
+            return new JsonResponse($feedArticles);
         }
 
-        if (isset($feed->channel) && is_object($feed->channel)) {
-            $articles = (array) $this->parseArticles($feed->channel);
+        // If the feed could not be initialized, we return a not found message
+        // since the most likely reason is that the resource it unavailable
+        $response = new JsonResponse([
+            'message' => 'Could not load resource correctly'
+        ]);
+        $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
 
-            // Sort the articles based on timestamp to get the latest first
-            usort($articles['articles'], function($a, $b) {
-                return $b['timestamp'] - $a['timestamp'];
-            });
-
-            $response = new JsonResponse($articles);
-            $response->setStatusCode(JsonResponse::HTTP_OK);
-
-            return $response;
-        } else {
-            $response = new JsonResponse([
-                'message' => 'The resource could not be parsed'
-            ]);
-            $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
-
-            return $response;
-        }
-    }
-
-    /**
-     * This function builds an object representing the feed channel
-     * on the desired form and returns it.
-     *
-     * @param object $channel is the channel object from the feed
-     *
-     * @return object is an object representing the feed
-     */
-    private function parseArticles($channel)
-    {
-        $articles = (object) [
-            'title' => (string) $channel->title,
-            'description' => (string) $channel->description,
-            'link' => (string) $channel->link,
-            'image' => (object) $channel->image,
-            'articles' => []
-        ];
-
-        foreach ($channel->item as $item) {
-            $article = new Article();
-            $article
-                ->setTitle($item->title)
-                ->setDescription($item->description)
-                ->setLink($item->link)
-                ->setImage($item->image)
-                ->setPublishDate(date('c', strtotime($item->pubDate)))
-                ->setTimestamp(strtotime($item->pubDate));
-
-            $articles->articles[] = $article->toArray();
-        }
-
-        return $articles;
+        return $response;
     }
 }

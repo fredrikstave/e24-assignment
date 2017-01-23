@@ -9,13 +9,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class VarnishLogController extends FOSRestController
 {
     /**
+     * This is the controller for main route for the varnish log endpoint.
+     *
      * @Rest\Get("/varnish-log")
      */
     public function indexAction()
     {
-        // Load the resource endpoint from configuration
-        $resource = $this->container->getParameter('api');
-        $rawLogData = file_get_contents($resource['varnish_log']);
+        $rawLogData = file_get_contents('http://tech.vg.no/intervjuoppgave/varnish.log');
         $strings = explode("\n", $rawLogData);
 
         // Get the aggregated data based on the strings of raw log data
@@ -36,10 +36,7 @@ class VarnishLogController extends FOSRestController
             ],
         ];
 
-        $response = new JsonResponse($listData);
-        $response->setStatusCode(JsonResponse::HTTP_OK);
-
-        return $response;
+        return new JsonResponse($listData);
     }
 
     /**
@@ -52,8 +49,8 @@ class VarnishLogController extends FOSRestController
      */
     private function getAggregatedData(array $lines)
     {
-        // Load log file pattern from configuration
-        $pattern = $this->container->getParameter('varnish_log_file_pattern');
+        // Regex pattern to match data in access logs
+        $pattern = '/^(\S+) (\S+) (\S+) \[([^:]+):(\d+:\d+:\d+) ([^\]]+)\] \"(\S+) (?P<resource>.*?) (\S+)\" (\S+) (\S+) "(?P<host>[^"]*)" "([^"]*)"$/';
         $aggregatedData = [
             'resources' => [],
             'hosts' => []
@@ -74,7 +71,7 @@ class VarnishLogController extends FOSRestController
                 $aggregatedData['resources'][$matches['resource']]++;
             }
 
-            if (isset($matches['host']) && $matches['host'] !== '-') {
+            if (isset($matches['host'])) {
                 // Check if the current host exists in our aggregated data
                 // and add it if it's not there
                 if (!isset($aggregatedData['hosts'][$matches['host']])) {
