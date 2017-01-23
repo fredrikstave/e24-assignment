@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import appStore from './redux/reducers';
 import App from './containers/App';
@@ -11,7 +12,8 @@ import VGNett from './containers/VGNett';
 import TestData from './containers/TestData';
 import NoMatch from './containers/NoMatch';
 
-let store = createStore(appStore);
+ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+ const store = createStoreWithMiddleware(appStore);
 
 render(
     <Provider store={store}>
@@ -27,5 +29,3 @@ render(
     </Provider>,
     document.getElementById('root')
 );
-
-store.dispatch({type: 'GET_ARTICLES'});

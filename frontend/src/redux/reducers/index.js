@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import articles from './articles';
-import logEntries from './log-entries';
-import feedEntries from './feed-entries';
+import feedArticles from './feed-articles';
+import varnishLogEntries from './log-entries';
+import testDataItems from './test-data-items';
 
 const appStore = combineReducers({
-    articles,
-    logEntries,
-    feedEntries
+    feedArticles,
+    varnishLogEntries,
+    testDataItems
 });
 
 export default appStore;

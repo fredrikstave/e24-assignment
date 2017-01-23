@@ -15,13 +15,14 @@ class TestDataController extends FOSRestController
      */
     public function indexAction()
     {
+        // Load the resource endpoint from configuration
         $resource = $this->container->getParameter('api');
         $testData = file_get_contents($resource['test_data']);
         $testData = json_decode($testData);
         $items = [];
 
         if ($testData !== null) {
-            foreach($testData as $item){
+            foreach($testData as $item) {
                 // Use norwegian as the date locale
                 Date::setLocale('no');
 
@@ -50,6 +51,13 @@ class TestDataController extends FOSRestController
                 // Append the article object as an array to items
                 $items[] = $article->toArray();
             }
+        } else {
+            $response = new JsonResponse([
+                'message' => 'No test data found'
+            ]);
+            $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
+
+            return $response;
         }
 
         // Sort the items based on timestamp with latest item first
@@ -57,6 +65,9 @@ class TestDataController extends FOSRestController
             return $b['timestamp'] - $a['timestamp'];
         });
 
-        return new JsonResponse($items);
+        $response = new JsonResponse($items);
+        $response->setStatusCode(JsonResponse::HTTP_OK);
+
+        return $response;
     }
 }

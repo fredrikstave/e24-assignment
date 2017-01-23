@@ -1,0 +1,7 @@
+{
+    "name": "e24-assignment-article-placeholder",
+    "version": "1.0.0",
+    "description": "This is an article placeholder component",
+    "private": true,
+    "main": "./ArticlePlaceholder.js"
+}

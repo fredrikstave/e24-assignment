@@ -1,35 +1,13 @@
-const logEntry = (state = {}, action) => {
-    switch (action.type) {
-        case 'ADD_LOG_ENTRY':
-            return {
-                id: action.id,
-                text: action.text
-            };
-        case 'TOGGLE_LOG_ENTRY':
-            if (state.id !== action.id) {
-                return state;
-            }
+import { ADD_VARNISH_LOG_ENTRIES } from '../actions/types';
 
-            return Object.assign({}, state, {
-                toggled: !state.toggled
-            });
+// Define an empty initial state
+const INTIAL_STATE = {};
+
+export default function varnishLogEntries(state = INTIAL_STATE, action) {
+    switch(action.type) {
+        case ADD_VARNISH_LOG_ENTRIES:
+            return { ...state, data: action.payload };
         default:
             return state;
     }
 }
-
-const logEntries = (state = [], action) => {
-    switch (action.type) {
-        case 'ADD_LOG_ENTRY':
-            return [
-                ...state,
-                logEntry(undefined, action)
-            ];
-        case 'TOGGLE_LOG_ENTRY':
-            return state.map(entry => logEntry(entry, action));
-        default:
-            return state;
-    }
-}
-
-export default logEntries;

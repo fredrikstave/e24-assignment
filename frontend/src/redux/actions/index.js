@@ -1,42 +1,55 @@
-let nextArticleId = 0;
-let nextLogEntryId = 0;
-let nextFeedEntryId = 0;
+import fetch from 'isomorphic-fetch';
+import { BASE_URL } from '../../env';
+import { 
+    ADD_FEED_ARTICLES, 
+    ADD_TEST_DATA_ITEMS, 
+    ADD_VARNISH_LOG_ENTRIES 
+} from './types';
 
-export const addArticle = (article) => {
-    return {
-        type: 'ADD_ARTICLE',
-        id: nextArticleId++,
-        article
+export function addFeedArticlesAction() {
+    return function(dispatch) {
+        fetch(`${BASE_URL}/feed`)
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                    type: ADD_FEED_ARTICLES,
+                    payload: json
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
 
-export const fetchArticles = (articles) => {
-    return {
-        type: 'FETCH_ARTICLES',
-        id: nextArticleId++,
-        articles
-    };
-}
-
-export const addLogEntry = (text) => {
-    return {
-        type: 'ADD_LOG_ENTRY',
-        id: nextLogEntryId++,
-        text
+export function addVarnishLogEntriesAction() {
+    return function(dispatch) {
+        fetch(`${BASE_URL}/varnish-log`)
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                    type: ADD_VARNISH_LOG_ENTRIES,
+                    payload: json
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
 
-export const toggleLogEntry = (id) => {
-    return {
-        type: 'TOGGLE_LOG_ENTRY',
-        id
-    }
-}
-
-export const addFeedEntry = (text) => {
-    return {
-        type: 'ADD_FEED_ENTRY',
-        id: nextFeedEntryId++,
-        text
+export function addTestDataItemsAction() {
+    return function(dispatch) {
+        fetch(`${BASE_URL}/test-data`)
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                    type: ADD_TEST_DATA_ITEMS,
+                    payload: json
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }

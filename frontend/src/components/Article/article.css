@@ -1,0 +1,20 @@
+.article:not(:first-child) {
+    margin-top: 10px;
+}
+
+.article a {
+    display: block;
+    color: #333333;
+    padding: 10px;
+    transition: background-color 200ms ease-in-out;
+    text-decoration: none;
+}
+
+.article a:hover {
+    color: #333333;
+    background-color: #f5f5f5;
+}
+
+.article__excerpt {
+    margin-top: 10px;
+}

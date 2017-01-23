@@ -13,6 +13,7 @@ class VarnishLogController extends FOSRestController
      */
     public function indexAction()
     {
+        // Load the resource endpoint from configuration
         $resource = $this->container->getParameter('api');
         $rawLogData = file_get_contents($resource['varnish_log']);
         $strings = explode("\n", $rawLogData);
@@ -35,7 +36,10 @@ class VarnishLogController extends FOSRestController
             ],
         ];
 
-        return new JsonResponse($listData);
+        $response = new JsonResponse($listData);
+        $response->setStatusCode(JsonResponse::HTTP_OK);
+
+        return $response;
     }
 
     /**

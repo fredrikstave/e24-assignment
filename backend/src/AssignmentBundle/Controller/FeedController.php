@@ -15,10 +15,9 @@ class FeedController extends FOSRestController
     public function indexAction()
     {
         $feed = null;
-        $response = null;
 
         try {
-            // Check to see if the resource is available
+            // Load the resource endpoint from configuration
             $resource = $this->container->getParameter('api');
             $feed = simplexml_load_file($resource['vg_nett_feed']);
         } catch(\Exception $exception) {
@@ -28,27 +27,40 @@ class FeedController extends FOSRestController
                 'message' => 'The resource could not be loaded'
             ]);
             $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
+
+            return $response;
         }
 
         if (isset($feed->channel) && is_object($feed->channel)) {
             $articles = (array) $this->parseArticles($feed->channel);
 
+            // Sort the articles based on timestamp to get the latest first
             usort($articles['articles'], function($a, $b) {
                 return $b['timestamp'] - $a['timestamp'];
             });
 
             $response = new JsonResponse($articles);
             $response->setStatusCode(JsonResponse::HTTP_OK);
+
+            return $response;
         } else {
             $response = new JsonResponse([
                 'message' => 'The resource could not be parsed'
             ]);
             $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
-        }
 
-        return $response;
+            return $response;
+        }
     }
 
+    /**
+     * This function builds an object representing the feed channel
+     * on the desired form and returns it.
+     *
+     * @param object $channel is the channel object from the feed
+     *
+     * @return object is an object representing the feed
+     */
     private function parseArticles($channel)
     {
         $articles = (object) [

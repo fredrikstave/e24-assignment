@@ -1,44 +1,23 @@
 import React, { Component } from 'react';
-import Article, { ArticlePlaceholder } from '../../components/Article';
-import { BASE_URL } from '../../env';
+import { connect } from 'react-redux';
+import Article from '../../components/Article';
+import ArticlePlaceholder from '../../components/ArticlePlaceholder';
+import { addTestDataItemsAction } from '../../redux/actions';
+
+function mapStateToProps(state) {
+    return state.testDataItems;
+}
+
+function mapDispatchToProps(dispatch) {
+    dispatch(addTestDataItemsAction());
+
+    return {};
+}
 
 class TestData extends Component {
-    constructor() {
-        super();
-        this.state = {};
-    }
-
-    componentDidMount() {
-        var _this = this;
-        fetch(`${BASE_URL}/test-data`)
-            .then((response) => response.json())
-            .then((json) => {
-                _this.setState({
-                    articles: json
-                });
-            });
-    }
-
-    renderHeader() {
-        if (this.state.image && this.state.title) {
-            return (
-                <div className="section__header">
-                    <h2>{this.state.title}</h2>
-                    <img src={this.state.image.url} alt={this.state.image.title} />
-                </div>
-            );
-        } else {
-            return (
-                <div className="section__header">
-                    <h2>Laster</h2>
-                </div>
-            );
-        }
-    }
-
     renderContent() {
-        if (this.state.articles) {
-            return this.state.articles.map((article, index) => {
+        if (this.props.data) {
+            return this.props.data.map((article, index) => {
                 return (
                     <Article
                         key={index}
@@ -58,13 +37,13 @@ class TestData extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="section">
-                {this.renderHeader()}
                 {this.renderContent()}
             </div>
         );
     }
 }
 
-export default TestData;
+export default connect(mapStateToProps, mapDispatchToProps)(TestData);

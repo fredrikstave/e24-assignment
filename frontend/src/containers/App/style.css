@@ -35,6 +35,7 @@ a {
     display: inline-block;
     padding-right: 50px;
     transition: padding .2s ease-in-out;
+    transition: all 300ms ease-in-out;
 }
 
 .app__header__menu__link {
@@ -63,6 +64,14 @@ a {
     text-decoration: none;
 }
 
+.app__header__toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    font-family: 'Gill Sans';
+}
+
 .app__content {
     padding: 20px 10px 40px;
 }
@@ -86,4 +95,18 @@ a {
     padding-bottom: 5px;
     margin: 0 0 15px 0;
     border-bottom: 2px solid #f16520;
+}
+
+@media screen and (max-width: 600px) {
+    .app__header {
+        text-align: right;
+    }
+
+    .app__header__menu {
+        display: none;
+    }
+
+    .app__header__toggle {
+        display: block;
+    }
 }

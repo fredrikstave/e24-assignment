@@ -1,36 +1,27 @@
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
-import { BASE_URL } from '../../env';
-import Article, { ArticlePlaceholder } from '../../components/Article';
+import { connect } from 'react-redux';
+import { addFeedArticlesAction } from '../../redux/actions';
+import Article from '../../components/Article';
+import ArticlePlaceholder from '../../components/ArticlePlaceholder';
 import './style.css';
 
-export default class VGNett extends Component {
-    constructor() {
-        super();
-        this.state = {};
-    }
+function mapStateToProps(state) {
+    return state.feedArticles;
+}
 
-    componentDidMount() {
-        var _this = this;
-        fetch(`${BASE_URL}/feed`)
-            .then((response) => response.json())
-            .then((json) => {
-                _this.setState({
-                    title: json.title,
-                    description: json.description,
-                    link: json.link,
-                    image: json.image,
-                    articles: json.articles
-                });
-            });
-    }
+function mapDispatchToProps(dispatch) {
+    dispatch(addFeedArticlesAction());
 
+    return {};
+}
+
+class VGNett extends Component {
     renderHeader() {
-        if (this.state.image && this.state.title) {
+        if (this.props.data && this.props.data.image && this.props.data.title) {
             return (
                 <div className="section__header">
-                    <h2>{this.state.title}</h2>
-                    <img src={this.state.image.url} alt={this.state.image.title} />
+                    <h2>{this.props.data.title}</h2>
+                    <img src={this.props.data.image.url} alt={this.props.data.image.title} />
                 </div>
             );
         } else {
@@ -43,8 +34,8 @@ export default class VGNett extends Component {
     }
 
     renderArticles() {
-        if (this.state.articles) {
-            return this.state.articles.map((article, index) => {
+        if (this.props.data && this.props.data.articles) {
+            return this.props.data.articles.map((article, index) => {
                 return (
                     <Article
                         key={index}
@@ -73,3 +64,5 @@ export default class VGNett extends Component {
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(VGNett);
