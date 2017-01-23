@@ -8,6 +8,7 @@ Additionally I've used the following packages:
 - nelmio/cors-bundle
 - jenssegers/date
 - friendsofsymfony/rest-bundle
+- jms/serializer-bundle
 
 Symfony 3.2 requires a minimum of PHP 5.5.9, so if you don't have this locally on your computer I'll recommend booting up a virtual machine stisfying this requirement.
 
